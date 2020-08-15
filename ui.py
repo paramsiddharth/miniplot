@@ -38,7 +38,10 @@ class MyApp(QMainWindow):
 		label_section = QHBoxLayout()
 		range_section = QGridLayout()
 		clarity_section = QHBoxLayout()
+		plot_section = QHBoxLayout()
 		bottom_section = QVBoxLayout()
+
+		status_layout = QHBoxLayout()
 
 		# Create widgets and items
 		figure = plt.figure()
@@ -54,7 +57,14 @@ Use the options below to plot your own equation!''')
 		help_message.setText('''<h3>Help</h3>
 Plotly lets you plot any equation of the form y = f(x).
 <br/>
-Enter the function f(x), specify the range of x, and click Plot!''')
+Enter the function f(x), specify the range of x, and click Plot!
+<br/><br/>
+Operators : <code>+, -, *, /</code><br/>
+Variable : <code>x</code><br/>
+Functions : <code>sin, cos, tan</code><br/>
+<code>pi</code> : π<br/>
+<code>e</code> : Exponential e<br/>
+<code>c</code> : Speed of Light<br/>''')
 		help_message.setStandardButtons(QMessageBox.Ok)
 		help_message.setWindowTitle(f'{appname} - Help')
 		self.help = help_message
@@ -90,10 +100,16 @@ Created by <a href="http://paramsid.com">Param Siddharth</a>.''')
 		clarity_spinbox.setValue(100)
 
 		plot_button = QPushButton('Plot')
+		plot_button.setMaximumWidth(200)
 
 		status = QStatusBar()
 		status_text = QLabel('')
-		status_text.setStyleSheet('color: #999999; padding: 0px 8px 0px 0px;')
+		status_text.setStyleSheet('color: #999999;')
+
+		attribution = QLabel('Made with <span style="color: red;">❤</span> by Param')
+		attribution.setTextFormat(Qt.RichText)
+		attribution.setStyleSheet('color: #555555; font-size: 20px;')
+		attribution.setAlignment(Qt.AlignRight | Qt.AlignVCenter)
 
 		help_menu.triggered.connect(self.help.exec_)
 		about_menu.triggered.connect(self.about.exec_)
@@ -105,7 +121,6 @@ Created by <a href="http://paramsid.com">Param Siddharth</a>.''')
 			range_text=(range_min, range_max), clarity=clarity_spinbox)
 		
 		# Finalize and display
-		...
 		top_section.addWidget(canvas)
 
 		buttons.addWidget(help_button, 0, 0, 1, 1)
@@ -138,17 +153,22 @@ Created by <a href="http://paramsid.com">Param Siddharth</a>.''')
 		clarity_section.addWidget(clarity_label)
 		clarity_section.addWidget(clarity_spinbox)
 
+		plot_section.addWidget(plot_button)
+
 		status.addWidget(status_text)
+		status.addPermanentWidget(attribution)
+
+		status_layout.addWidget(status)
 
 		bottom_section.addLayout(label_section)
 		bottom_section.addLayout(range_section)
 		bottom_section.addLayout(clarity_section)
-		bottom_section.addWidget(plot_button)
+		bottom_section.addLayout(plot_section)
 		
 		layout.addLayout(top_section)
 		layout.addLayout(middle_section)
 		layout.addLayout(bottom_section)
-		layout.addWidget(status)
+		layout.addLayout(status_layout)
 		
 		window.setLayout(layout)
 		self.setCentralWidget(window)

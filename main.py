@@ -8,7 +8,7 @@ def main():
 	# Initialize application
 	global app, appname
 	app = QApplication(argv)
-	appname = 'Plotly'
+	appname = 'MiniPlot'
 
 	# Create main window
 	programmme = ui.MyApp(app, appname)

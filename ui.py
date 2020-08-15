@@ -2,8 +2,10 @@ from PySide2.QtWidgets import \
 	QMainWindow, QWidget, QHBoxLayout, \
 	QVBoxLayout, QPushButton, QLineEdit, \
 	QLabel, QGridLayout, QSizePolicy, \
-	QStatusBar, QMessageBox, QSpinBox, QMenuBar
+	QStatusBar, QMessageBox, QSpinBox, \
+	QMenuBar
 from PySide2.QtCore import Qt
+from PySide2.QtGui import QIcon
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 import matplotlib.pyplot as plt
 import backmath
@@ -13,8 +15,9 @@ class MyApp(QMainWindow):
 	def __init__(self, app, appname, *args, **kwargs):
 		super().__init__(*args, **kwargs)
 		self.hide()
-		self.setMinimumSize(640, 480)
-
+		#self.setMinimumSize(640, 480)
+		self.setFixedSize(self.geometry().width(), self.geometry().height())
+		self.setWindowIcon(QIcon('icon.ico'))
 		self.setWindowTitle(appname)
 
 		# Create menu bar
@@ -106,7 +109,7 @@ Created by <a href="http://paramsid.com">Param Siddharth</a>.''')
 		status_text = QLabel('')
 		status_text.setStyleSheet('color: #999999;')
 
-		attribution = QLabel('Made with <span style="color: red;">❤</span> by Param')
+		attribution = QLabel('Made with <span style="color: red;">❤</span> by <a href="http://paramsid.com">Param</a>')
 		attribution.setTextFormat(Qt.RichText)
 		attribution.setStyleSheet('color: #555555; font-size: 20px;')
 		attribution.setAlignment(Qt.AlignRight | Qt.AlignVCenter)

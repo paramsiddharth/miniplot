@@ -2,11 +2,20 @@ from Equation import Expression
 import numpy as np
 from sys import stderr
 
-def configure(canvas, figure, btn, text, limits):	
+def configure(canvas, figure, btn, text, limits, status, range_text, clarity):	
 	def show_error(prompt=''):
-		print(f'Error: {prompt}', file=stderr)
+		# print(f'Error: {prompt}', file=stderr)
+		status.setText(f'ERROR: {prompt} ')
+		status.setStyleSheet('color: red;')
 
-	def plot_result():
+	def plot_result(sample=False):
+		# For the sample
+		if sample:
+			text.setText('sin(x)')
+			range_text[0].setText('0')
+			range_text[1].setText('2 * pi')
+			plot_result()
+
 		# Clear canvas
 		figure.clear()
 		axes = figure.add_subplot(1, 1, 1)
@@ -23,8 +32,7 @@ def configure(canvas, figure, btn, text, limits):
 			return
 
 		# Calculate
-		clarity = 100
-		x = np.linspace(a, b, clarity)
+		x = np.linspace(a, b, clarity.value())
 		try:
 			y = np.vectorize(fx)(x)
 		except:
@@ -35,7 +43,12 @@ def configure(canvas, figure, btn, text, limits):
 		axes.set_xlim((a, b))
 		axes.axis('on')
 		axes.plot(x, y)
+		axes.set_title(f'$y = {str(fx)}$') #.replace(' \\times ', ' '))
+		axes.set_xlabel('x')
+		axes.set_ylabel('y')
 		canvas.draw()
+		status.setText('SUCCESS ')
+		status.setStyleSheet('color: green;')
 
 	def read_expression():
 		expr_raw = text.text()
@@ -56,3 +69,4 @@ def configure(canvas, figure, btn, text, limits):
 	
 	# Plot on click
 	btn.clicked.connect(plot_result)
+	plot_result(sample=True)

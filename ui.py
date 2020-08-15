@@ -57,8 +57,8 @@ Use the options below to plot your own equation!''')
 
 		help_message = QMessageBox()
 		help_message.setTextFormat(Qt.RichText)
-		help_message.setText('''<h3>Help</h3>
-Plotly lets you plot any equation of the form y = f(x).
+		help_message.setText(f'''<h3>Help</h3>
+{appname} lets you plot any equation of the form y = f(x).
 <br/>
 Enter the function f(x), specify the range of x, and click Plot!
 <br/><br/>

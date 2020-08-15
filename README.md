@@ -11,3 +11,10 @@ Equation were used for plotting and expression-parsing respectively.
    ```
    > python -W ignore main.py
    ```
+ - To build distribution, use `pyinstaller`.
+   ```
+   > pyinstaller main.py -w -i icon.ico --clean --noconfirm
+   ```
+   Note: Due to dependency issues, you might need to manually copy `matplotlib` and
+   `Equation` from your Python installation, and `icon.ico` from the source directory 
+   to the distribution folder for the executable to function properly.

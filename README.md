@@ -13,7 +13,7 @@ Equation were used for plotting and expression-parsing respectively.
    ```
    > python -W ignore main.py
    ```
- - To build distribution, use `pyinstaller`.
+ - To build a distribution, use `pyinstaller`.
    ```
    > pyinstaller main.py -w -i icon.ico --clean --noconfirm
    ```
